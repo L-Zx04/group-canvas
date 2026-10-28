@@ -1,83 +1,72 @@
 :root{
-  --ink:#0f2433;
   font-family:"Inter","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
-  color:var(--ink);
-  background:#0b1d2a;
-  -webkit-font-smoothing:antialiased;
+  background:#08141f;
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{
   display:flex;align-items:center;justify-content:center;
-  padding:18px;
+  padding:16px;
   background:
-    radial-gradient(900px 500px at 50% -10%, #14405c 0%, transparent 62%),
-    linear-gradient(180deg,#0b1d2a 0%,#061019 100%);
+    radial-gradient(900px 480px at 50% -12%, #14405c 0%, transparent 62%),
+    linear-gradient(180deg,#0a1c29 0%,#050d15 100%);
 }
 .frame{
-  width:100%;max-width:1180px;
-  border-radius:20px;overflow:hidden;
+  width:100%;max-width:1180px;overflow:hidden;
+  border-radius:18px;
   border:1px solid rgba(120,200,240,.18);
-  box-shadow:0 30px 80px rgba(0,0,0,.55);
-  background:#bfe4f7;
+  box-shadow:0 28px 70px rgba(0,0,0,.55);
 }
 .scene{display:block;width:100%;height:auto}
 
-/* 太阳 */
-.sun-glow{transform-box:fill-box;transform-origin:center;animation:glow 6s ease-in-out infinite}
-@keyframes glow{
-  0%,100%{opacity:.7;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.1)}
-}
+/* 太阳呼吸 */
+.sun{transform-box:fill-box;transform-origin:center;animation:sun 5s ease-in-out infinite}
+@keyframes sun{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 
-/* 云 */
-.cloud{animation:drift 30s linear infinite}
-.cloud.c2{animation-duration:40s;animation-delay:-12s}
-.cloud.c3{animation-duration:52s;animation-delay:-28s}
+/* 云飘 */
+.cloud{animation:drift 26s linear infinite}
+.cloud.c2{animation-duration:38s;animation-delay:-9s}
+.cloud.c3{animation-duration:48s;animation-delay:-24s}
 @keyframes drift{
-  from{transform:translateX(-220px)}
-  to{transform:translateX(1320px)}
+  from{transform:translateX(-260px)}
+  to{transform:translateX(1340px)}
 }
 
-/* 飞机整体轻微起伏 */
-.plane{transform-box:fill-box;transform-origin:center;animation:bob 7s ease-in-out infinite}
-@keyframes bob{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-}
-
-/* 螺旋桨 */
-.prop{transform-box:fill-box;transform-origin:center;animation:spin .32s linear infinite}
+/* 车轮转 */
+.wheel{transform-box:fill-box;transform-origin:center;animation:spin 1.15s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* 车轮 */
-.wheel{transform-box:fill-box;transform-origin:center;animation:spin 1.3s linear infinite}
-
-/* 鹈鹕翅膀 */
-.wing-l{transform-box:fill-box;transform-origin:100% 100%;animation:flapL 2.6s ease-in-out infinite}
-@keyframes flapL{0%,100%{transform:rotate(-3.5deg)}50%{transform:rotate(3.5deg)}}
-.wing-r{transform-box:fill-box;transform-origin:0% 100%;animation:flapR 2.6s ease-in-out infinite}
-@keyframes flapR{0%,100%{transform:rotate(3.5deg)}50%{transform:rotate(-3.5deg)}}
-
 /* 鹈鹕踩踏板 */
-.leg{transform-box:fill-box;transform-origin:top center;animation:pedal 1.3s ease-in-out infinite}
-.leg.back{animation-delay:-.65s}
-@keyframes pedal{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(11deg)}}
+.leg{transform-box:fill-box;transform-origin:top center;animation:pedal 1.15s ease-in-out infinite}
+.leg.back{animation-delay:-.58s}
+@keyframes pedal{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(13deg)}}
 
-/* 北极熊起伏 */
-.bear{transform-box:fill-box;transform-origin:bottom center;animation:bob2 2.4s ease-in-out infinite}
-@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* 翅膀扇动 */
+.wing{transform-box:fill-box;transform-origin:100% 90%;animation:flap 1.15s ease-in-out infinite}
+@keyframes flap{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(9deg)}}
 
-/* 秦始皇拧螺丝的手臂 */
-.arm{transform-box:fill-box;transform-origin:0% 0%;animation:screw 1s ease-in-out infinite}
-@keyframes screw{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+/* 身体随踩踏起伏 */
+.body-bob{transform-box:fill-box;transform-origin:center;animation:bob 1.15s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-/* 火花 */
-.spark{animation:blink .6s steps(2,end) infinite}
-.spark.s2{animation-delay:.3s}
-@keyframes blink{0%{opacity:1}100%{opacity:0}}
+/* 地面飞驰 */
+.dash{animation:run .8s linear infinite}
+@keyframes run{
+  from{transform:translateX(0)}
+  to{transform:translateX(-160px)}
+}
+
+/* 速度线 */
+.speed line{animation:zip 1s linear infinite}
+.speed line:nth-child(2){animation-delay:.35s}
+.speed line:nth-child(3){animation-delay:.65s}
+@keyframes zip{
+  0%{transform:translateX(180px);opacity:0}
+  30%{opacity:.75}
+  100%{transform:translateX(-120px);opacity:0}
+}
 
 @media(max-width:640px){
-  body{padding:8px}
-  .frame{border-radius:12px}
+  body{padding:6px}
+  .frame{border-radius:10px}
 }
